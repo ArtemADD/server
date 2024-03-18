@@ -1,0 +1,60 @@
+.header {
+    background-color: #F8F9FA;
+}
+.header-title {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.header-profile {
+    display: inline-block;
+    position: relative;
+    left: 400px
+}
+.header-about {
+    display: inline-block;
+    position: relative;
+    left: 900px
+}
+#zxc {
+    margin-left: 20px;
+    color: grey;
+}
+#tb div {
+    position: relative;
+    top: -10px;
+    margin: 10px;
+    left: -15px;
+}
+#tb h1  {
+    text-align: center;
+}
+#tb th {
+    text-transform: capitalize;
+    padding: 15px 15px;
+    text-align: center;
+    background: #dddddd;
+    font-size: 18px;
+}
+#tb td {
+    text-transform: capitalize;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 18px;
+}
+.td-def {
+    background: #eeeeff;
+}
+#tb table {
+   border-collapse: collapse;
+   border-spacing: 10px, 10px;
+   width: 1100px;
+   left: 100px
+}
+#tb caption {
+    caption-side: top;
+    text-align: left;
+    font-size: 30px;
+    color: black;
+    font-weight: bold;
+}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if list == 'ol' or list == 'ul' %}
+        <h2>Список профессий</h2>
+        {% set profs = ['zxc', 'zxc', 'zxc', 'zxc'] %}
+        {% if list == 'ul' %}
+            <ul>
+                {% for el in profs %}
+                        <li>{{ el }}</li>
+                {% endfor %}
+            </ul>
+        {% elif list == 'ol' %}
+            <ol>
+                {% for el in profs %}
+                        <li>{{ el }}</li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    {% else %}
+        <h1>ERROR</h1>
+    {% endif %}
+{% endblock %}
