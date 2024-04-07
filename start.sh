@@ -13,5 +13,8 @@ if [ ! -d $VIRTUALENV ]; then
   python3 -m venv $VIRTUALENV
 fi
 
+# Install the requirements
+$VIRTUALENV/bin/pip install -r requirements.txt
+
 # Run your glorious application
 $VIRTUALENV/bin/python3 server.py
