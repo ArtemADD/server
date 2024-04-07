@@ -1,8 +1,2 @@
 Flask
-Flask-Login
-Flask-WTF
-SQLAlchemy
-SQLAlchemy-serializer
-Werkzeug
-WTForms
 requests
