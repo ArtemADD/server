@@ -1,11 +1,13 @@
 from flask import Flask, request
 import logging
 import json
-from geo import get_country, get_distance, get_coordinates
+from googletrans import LANGUAGES
+from googletrans import Translator
 
 app = Flask(__name__)
 
-logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logging.basicConfig(level=logging.INFO)
+
 
 @app.route('/post', methods=['POST'])
 def main():
@@ -33,42 +35,27 @@ def handle_dialog(res, req):
 
     if req['session']['new']:
 
-        res['response']['text'] = 'Привет! Я могу сказать в какой стране город или сказать расстояние между городами!'
+        res['response']['text'] = "Привет! Я могу переводить слова! Начинай диалог с 'Переведи слово'."
 
         return
-
-    cities = get_cities(req)
-
-    if len(cities) == 0:
-
-        res['response']['text'] = 'Ты не написал название не одного города!'
-
-    elif len(cities) == 1:
-
-        res['response']['text'] = 'Этот город в стране - ' + get_country(cities[0])
-
-    elif len(cities) == 2:
-
-        distance = get_distance(get_coordinates(cities[0]), get_coordinates(cities[1]))
-        res['response']['text'] = 'Расстояние между этими городами: ' + str(round(distance)) + ' км.'
-
+    if 'переведи слово' in req['request']['original_utterance'].lower():
+        word = get_word(req)
+        res['response']['text'] = translator(word)
     else:
+        res['response']['text'] = 'Не поняла!'
+    return
 
-        res['response']['text'] = 'Слишком много городов!'
+
+def translator(word):
+    tr = Translator()
+    word = tr.translate(word, dest='ru').text
+    return word
 
 
-def get_cities(req):
+def get_word(req):
+    text = req['request']['original_utterance'].lower().replace('переведи слово', '')
+    return text
 
-    cities = []
-
-    for entity in req['request']['nlu']['entities']:
-
-        if entity['type'] == 'YANDEX.GEO':
-
-            if 'city' in entity['value'].keys():
-                cities.append(entity['value']['city'])
-
-    return cities
 
 if __name__ == '__main__':
     app.run()
